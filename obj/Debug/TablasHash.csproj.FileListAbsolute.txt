@@ -1,0 +1,10 @@
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\bin\Debug\TablasHash.exe.config
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\bin\Debug\TablasHash.exe
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\bin\Debug\TablasHash.pdb
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.Form1.resources
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.Properties.Resources.resources
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.csproj.GenerateResource.cache
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.exe
+C:\Users\HP\Desktop\COMPUTACION\7mo semestre\Estructuras de Datos Avanzadas\TablasHash\obj\Debug\TablasHash.pdb
