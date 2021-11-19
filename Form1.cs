@@ -168,7 +168,7 @@ namespace TablasHash
             {
                 //debo enlazarla al puntero de cubeta vacias de la tabla hash
                 tablaHash.Cubetas_vacias.Add(cubetaParaEliminar);
-                tablaHash.Direccion_cubetas_vacias = cubetaParaEliminar.Direccion;
+                tablaHash.Direccion_cubetas_vacias = tablaHash.Cubetas_vacias.First().Direccion;
 
                 if (cubetaParaEliminar != tablaHash.ElementAt(indice_de_ranura).Cubetas.First())//si la cubeta no es la primera de la lista
                 {
@@ -183,6 +183,16 @@ namespace TablasHash
             }
         }
 
+        private void enlazaCubetasVacias()
+        {
+            foreach (Cubeta cubeta in tablaHash.Cubetas_vacias)
+            {
+                for (int i = 0; i < tablaHash.Cubetas_vacias.Count - 1; i++)
+                {
+                    tablaHash.Cubetas_vacias.ElementAt(i).Direccion_siguiente_cubeta = tablaHash.Cubetas_vacias.ElementAt(i + 1).Direccion;
+                }
+            }
+        }
         private Cubeta buscaCubetaParaInsertar(int clave, int indice_de_ranura)
         {
             //si es necesario buscar una pagina para insertar significa que la ranura tiene mas de una cubeta
@@ -237,11 +247,14 @@ namespace TablasHash
 
         private void button2_Click(object sender, EventArgs e)//escribir y poner en pantalla 
         {
+
+            enlazaCubetasVacias();
+
             File.WriteAllText("tablaHash.txt", "");//limpio el archivo
             //ESCRIBIR EN U ARCHIVO
             StreamWriter escribir = File.AppendText("tablaHash.txt");
 
-            escribir.WriteLine(tablaHash.Numero_ranuras + " " + tablaHash.Numero_registros_por_cubeta + " " + tablaHash.Tamaño_registro + " " + tablaHash.Direccion_cubetas_vacias + " " + tablaHash.DireccionInicial + "\n");
+            escribir.WriteLine(tablaHash.Numero_ranuras + " " + tablaHash.Numero_registros_por_cubeta + " " + tablaHash.Tamaño_registro + " " + tablaHash.Direccion_cubetas_vacias + " " + direccionAcumulador + "\n");
             
             foreach (Ranura ranura in tablaHash)
             {
