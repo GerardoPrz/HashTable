@@ -168,6 +168,7 @@ namespace TablasHash
             {
                 //debo enlazarla al puntero de cubeta vacias de la tabla hash
                 tablaHash.Cubetas_vacias.Add(cubetaParaEliminar);
+                tablaHash.Direccion_cubetas_vacias = cubetaParaEliminar.Direccion;
 
                 if (cubetaParaEliminar != tablaHash.ElementAt(indice_de_ranura).Cubetas.First())//si la cubeta no es la primera de la lista
                 {
@@ -245,6 +246,11 @@ namespace TablasHash
             foreach (Ranura ranura in tablaHash)
             {
                 escribir.WriteLine(tablaHash.IndexOf(ranura) + ", " + ranura.Cubetas.ElementAt(0).Direccion + "\n");
+            }
+
+            foreach (Cubeta cubeta in tablaHash.Cubetas_vacias)
+            {
+                escribir.WriteLine(cubeta.Direccion + " " + cubeta.Registros.Count + " " + cubeta.Direccion_siguiente_cubeta + "\n");
             }
 
             foreach (Ranura ranura in tablaHash)
@@ -339,6 +345,7 @@ namespace TablasHash
                 {
                     int indice_de_ranura = funcionHash(int.Parse(item));
                     insertar(int.Parse(item), indice_de_ranura);
+                    ingresados.Add(int.Parse(item));
                 }
 
             }
