@@ -11,7 +11,7 @@ namespace TablasHash
         private int numero_registros_por_cubeta;
         private int numero_ranuras;
         private int tamaño_registro;
-        private int direccion_cubetas_vacias;//creo que esto tambien debe ser una lista de cubetas
+        private int direccion_cubetas_vacias;
         private List<Cubeta> cubetas_vacias;
         private int direccionInicial;
 

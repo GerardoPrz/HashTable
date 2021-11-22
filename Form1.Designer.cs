@@ -40,15 +40,16 @@
             this.button1 = new System.Windows.Forms.Button();
             this.textBox_numeroRegistrosPorCubeta = new System.Windows.Forms.TextBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button_Eliminar = new System.Windows.Forms.Button();
             this.button_Insertar = new System.Windows.Forms.Button();
             this.textBox_insertar = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.richTextBox_escribir_leer_archivo = new System.Windows.Forms.RichTextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.button_Eliminar = new System.Windows.Forms.Button();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button_LeerArchivo = new System.Windows.Forms.Button();
+            this.button_LeerEstructuraHash = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -174,6 +175,16 @@
             this.tabPage2.Text = "Insertar/Eliminar";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // button_Eliminar
+            // 
+            this.button_Eliminar.Location = new System.Drawing.Point(247, 206);
+            this.button_Eliminar.Name = "button_Eliminar";
+            this.button_Eliminar.Size = new System.Drawing.Size(75, 23);
+            this.button_Eliminar.TabIndex = 2;
+            this.button_Eliminar.Text = "Eliminar";
+            this.button_Eliminar.UseVisualStyleBackColor = true;
+            this.button_Eliminar.Click += new System.EventHandler(this.button_Eliminar_Click);
+            // 
             // button_Insertar
             // 
             this.button_Insertar.Location = new System.Drawing.Point(247, 148);
@@ -221,18 +232,9 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button_Eliminar
-            // 
-            this.button_Eliminar.Location = new System.Drawing.Point(247, 206);
-            this.button_Eliminar.Name = "button_Eliminar";
-            this.button_Eliminar.Size = new System.Drawing.Size(75, 23);
-            this.button_Eliminar.TabIndex = 2;
-            this.button_Eliminar.Text = "Eliminar";
-            this.button_Eliminar.UseVisualStyleBackColor = true;
-            this.button_Eliminar.Click += new System.EventHandler(this.button_Eliminar_Click);
-            // 
             // tabPage4
             // 
+            this.tabPage4.Controls.Add(this.button_LeerEstructuraHash);
             this.tabPage4.Controls.Add(this.richTextBox1);
             this.tabPage4.Controls.Add(this.button_LeerArchivo);
             this.tabPage4.Location = new System.Drawing.Point(4, 22);
@@ -260,6 +262,16 @@
             this.button_LeerArchivo.Text = "Leer archivo";
             this.button_LeerArchivo.UseVisualStyleBackColor = true;
             this.button_LeerArchivo.Click += new System.EventHandler(this.button_LeerArchivo_Click);
+            // 
+            // button_LeerEstructuraHash
+            // 
+            this.button_LeerEstructuraHash.Location = new System.Drawing.Point(409, 263);
+            this.button_LeerEstructuraHash.Name = "button_LeerEstructuraHash";
+            this.button_LeerEstructuraHash.Size = new System.Drawing.Size(150, 23);
+            this.button_LeerEstructuraHash.TabIndex = 4;
+            this.button_LeerEstructuraHash.Text = "Leer estructura hash";
+            this.button_LeerEstructuraHash.UseVisualStyleBackColor = true;
+            this.button_LeerEstructuraHash.Click += new System.EventHandler(this.button_LeerEstructuraHash_Click);
             // 
             // Form1
             // 
@@ -304,6 +316,7 @@
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button_LeerArchivo;
+        private System.Windows.Forms.Button button_LeerEstructuraHash;
     }
 }
 

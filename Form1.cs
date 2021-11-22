@@ -33,6 +33,11 @@ namespace TablasHash
             int tamañoRegistro = int.Parse(textBox_tamañoRegistro.Text);
             int direccionInicial = int.Parse(textBox_direccionInicial.Text);
 
+            inicializaTablaHash(numeroRegistrosPorCubeta, numeroRanuras, tamañoRegistro, direccionInicial);
+        }
+
+        private void inicializaTablaHash(int numeroRegistrosPorCubeta, int numeroRanuras, int tamañoRegistro, int direccionInicial)
+        {
             this.tablaHash = new IndicePrincipal(numeroRegistrosPorCubeta, numeroRanuras, tamañoRegistro, direccionInicial);
             this.direccionAcumulador = tablaHash.DireccionInicial;
 
@@ -52,6 +57,7 @@ namespace TablasHash
                 }
             }
         }
+
 
         private void button_Insertar_Click(object sender, EventArgs e)
         {
@@ -114,13 +120,13 @@ namespace TablasHash
                     //elimino el ultimo registro (el que recorrí)
                     cubetaParaInsertar.Registros.Remove(ultimoRegistro_cubetaActual);
                 }
-            } 
+            }
             else if (primerCubeta_de_la_ranura.Registros.Count < tablaHash.Numero_registros_por_cubeta)//si la primer cubeta de la ranura aun no esta llena
             {
                 //si es el primer registro que se va a insertar en la cubeta entonces a la cubeta le asigno la direccion de ese  registro
                 if (primerCubeta_de_la_ranura.Registros.Count == 0)
                 {
-                    primerCubeta_de_la_ranura.Direccion = nuevoRegistro.Direccion;   
+                    primerCubeta_de_la_ranura.Direccion = nuevoRegistro.Direccion;
                 }
                 //inserto en la primer cubeta de la ranura
                 primerCubeta_de_la_ranura.Registros.Add(nuevoRegistro);
@@ -193,6 +199,7 @@ namespace TablasHash
                 }
             }
         }
+
         private Cubeta buscaCubetaParaInsertar(int clave, int indice_de_ranura)
         {
             //si es necesario buscar una pagina para insertar significa que la ranura tiene mas de una cubeta
@@ -203,7 +210,7 @@ namespace TablasHash
             //primero debo recorrer todas las cubetas de la ranura
             for (int i = 0; i + 1 < tablaHash.ElementAt(indice_de_ranura).Cubetas.Count; i++)
             {
-                if(tablaHash.ElementAt(indice_de_ranura).Cubetas.ElementAt(i + 1).Direccion != 0)
+                if (tablaHash.ElementAt(indice_de_ranura).Cubetas.ElementAt(i + 1).Direccion != 0)
                 {
                     Registro registroAdelantado = tablaHash.ElementAt(indice_de_ranura).Cubetas.ElementAt(i + 1).Registros.ElementAt(0);//tomo el primer registro de la cubeta que sigue
                                                                                                                                         //3
@@ -222,9 +229,9 @@ namespace TablasHash
                 }
             }
 
-           //si durante el recorrido no encontro la pagina quiere decir que la que debemos devolver es la ultima pagina
-           if (encontrado == false)
-           {
+            //si durante el recorrido no encontro la pagina quiere decir que la que debemos devolver es la ultima pagina
+            if (encontrado == false)
+            {
                 foreach (Cubeta cubeta in tablaHash.ElementAt(indice_de_ranura).Cubetas)
                 {
                     if (cubeta.Direccion != 0)
@@ -232,8 +239,8 @@ namespace TablasHash
                         cubetaParaInsertar = cubeta;//aqui hasta que encuentre la utlima cubeta
                     }
                 }
-           }
-            
+            }
+
             return cubetaParaInsertar;
         }
         private int funcionHash(int clave_a_insertar)
@@ -255,7 +262,7 @@ namespace TablasHash
             StreamWriter escribir = File.AppendText("tablaHash.txt");
 
             escribir.WriteLine(tablaHash.Numero_ranuras + " " + tablaHash.Numero_registros_por_cubeta + " " + tablaHash.Tamaño_registro + " " + tablaHash.Direccion_cubetas_vacias + " " + direccionAcumulador + "\n");
-            
+
             foreach (Ranura ranura in tablaHash)
             {
                 escribir.WriteLine(tablaHash.IndexOf(ranura) + ", " + ranura.Cubetas.ElementAt(0).Direccion + "\n");
@@ -357,8 +364,15 @@ namespace TablasHash
                 foreach (string item in campos)
                 {
                     int indice_de_ranura = funcionHash(int.Parse(item));
-                    insertar(int.Parse(item), indice_de_ranura);
-                    ingresados.Add(int.Parse(item));
+                    if (ingresados.Contains(int.Parse(item)))
+                    {
+                        MessageBox.Show("Esta clave ya fue ingresada");
+                    }
+                    else
+                    {
+                        insertar(int.Parse(item), indice_de_ranura);
+                        ingresados.Add(int.Parse(item));
+                    }
                 }
 
             }
@@ -369,6 +383,77 @@ namespace TablasHash
             catch (Exception fe)
             {
                 Console.WriteLine("error" + fe.Message);
+            }
+        }
+
+        private void button_LeerEstructuraHash_Click(object sender, EventArgs e)
+        {
+            int numero_registros_por_cubeta;
+            int numero_ranuras;
+            int tamaño_registro;
+            int direccion_cubetas_vacias;
+            int direccionInicial;
+
+            StreamReader lectura2;
+            string cadena;
+            List<string> encabezadoHash = new List<string>();
+            char[] separador = { ',' };
+            List<string> campos = new List<string>();
+
+            try
+            {
+
+                lectura2 = File.OpenText("estructuraHash.txt");
+
+                //recuperar solo las claves de las cubetas para volverlas a insertar
+                cadena = lectura2.ReadLine();
+                while (cadena != null)
+                {
+                    campos = cadena.Split(',').ToList();
+                    if (campos[0] == "E")
+                    {
+                        MessageBox.Show("Test");
+                        numero_registros_por_cubeta = int.Parse(campos[1]);
+                        numero_ranuras = int.Parse(campos[2]);
+                        tamaño_registro = int.Parse(campos[3]);
+                        direccion_cubetas_vacias = int.Parse(campos[4]);
+                        direccionInicial = int.Parse(campos[5]);
+
+                        //inicializar arbol con lo elementos que tengo del encabezado
+                        inicializaTablaHash( numero_ranuras, numero_registros_por_cubeta, tamaño_registro, direccionInicial);
+                    }
+                    if (campos[0].ToString() == "CV")
+                    {
+                        //es una cubeta vacia
+
+                    }
+                    if (campos[0] == ";")
+                    {
+                        int claveParaInsertar = int.Parse(campos[1]);
+                        //es una clave
+                        int indice_de_ranura = funcionHash(claveParaInsertar);
+                        if (ingresados.Contains(claveParaInsertar))
+                        {
+                            MessageBox.Show("Esta clave ya fue ingresada");
+                        }
+                        else
+                        {
+                            insertar(claveParaInsertar, indice_de_ranura);
+                            ingresados.Add(claveParaInsertar);
+                        }
+                    }
+                    cadena = lectura2.ReadLine();
+                }
+                lectura2.Close();
+            }
+            catch (FileNotFoundException fe)
+            {
+                Console.WriteLine("Erro" + fe);
+            }
+            catch (Exception fe)
+            {
+                Console.WriteLine("error" + fe.Message);
+
             }
         }
     }
